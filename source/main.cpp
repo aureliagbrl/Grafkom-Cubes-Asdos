@@ -1,11 +1,15 @@
 #include <GL/glut.h>  // GLUT, include glu.h and gl.h
+#include <iostream>
 
-void display() {
+float x = 0;
+
+void myDisplay()
+{
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
     glMatrixMode(GL_MODELVIEW);     
 
     glLoadIdentity();                 
-    glTranslatef(0.0f, 0.0f, -10.0f);  
+    glTranslatef(x, 0.0f, -10.0f);  
 
     glBegin(GL_QUADS);                
         glColor3f(0.0f, 1.0f, 0.0f);     // Green
@@ -48,7 +52,8 @@ void display() {
     glutSwapBuffers();
 }
 
-void reshape(GLsizei width, GLsizei height) {
+void reshape(GLsizei width, GLsizei height)
+{
     if (height == 0) height = 1;
     GLfloat aspect = (GLfloat)width / (GLfloat)height;
 
@@ -60,15 +65,27 @@ void reshape(GLsizei width, GLsizei height) {
     gluPerspective(45.0f, aspect, 0.1f, 100.0f);
 }
 
+//void myMouse()
+
+void timer(int)
+{
+    x+=0.001f;
+
+    glutPostRedisplay();
+    glutTimerFunc(16, timer, 0);
+
+}
+
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE);
     glutInitWindowSize(640, 480);
     glutInitWindowPosition(50, 50);
-    glutCreateWindow("Aurelia Gabriele");
+    glutCreateWindow("Koeboes");
 
-    glutDisplayFunc(display);
+    glutDisplayFunc(myDisplay);
     glutReshapeFunc(reshape);
+    glutTimerFunc(16, timer, 0);
 
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f); 
     glClearDepth(1.0f);

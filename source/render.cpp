@@ -1,6 +1,16 @@
+#include <iostream>
 #include <GL/glut.h>
 
+#include "common.hpp"
 #include "render.hpp"
+
+CameraData * cameraDataP;
+
+void
+InitRender(CameraData * initCameraData)
+{
+    cameraDataP = initCameraData;
+}
 
 void
 RenderDisplay()
@@ -8,8 +18,18 @@ RenderDisplay()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
     glMatrixMode(GL_MODELVIEW);     
 
-    glLoadIdentity();                 
-    glTranslatef(0.0f, 0.0f, -10.0f);  
+    glLoadIdentity();
+    glTranslatef(
+        cameraDataP->pos.x,
+        cameraDataP->pos.y,
+        cameraDataP->pos.z
+    );
+    glRotatef(
+        cameraDataP->angle,
+        cameraDataP->rotation.x,
+        cameraDataP->rotation.y,
+        cameraDataP->rotation.z
+    );
 
     glBegin(GL_QUADS);                
         glColor3f(0.0f, 1.0f, 0.0f);     // Green
@@ -55,6 +75,19 @@ RenderDisplay()
 void
 BlitDisplay(int deltaTime)
 {
+    cameraDataP->rotation.x = 1;
+    cameraDataP->rotation.y = 0.5;
+    cameraDataP->rotation.z = 0.25;
+    cameraDataP->angle += 0.0001f;
+
+    if(cameraDataP->angle >= 360)
+    {
+        cameraDataP->angle = 0.0f;
+    }
+
+    std::cout << cameraDataP->angle << " " << cameraDataP->rotation.x << "         \r";
+    fflush(stdout);
+
     glutPostRedisplay();
     glutTimerFunc(deltaTime, BlitDisplay, 0);
 }

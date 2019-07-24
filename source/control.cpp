@@ -25,14 +25,6 @@ MouseDragEventHandler(int posX, int posY)
 {
     mouseDataP->mousePos.x = posX;
     mouseDataP->mousePos.y = posY;
-
-    if(mouseDataP->buttonNumber == 0) {
-        std::cout << "Dragging " << num << " Pos (";
-        std::cout << mouseDataP->mousePos.x << " ";
-        std::cout << mouseDataP->mousePos.y << ")";
-        std::cout << "                   \r"; fflush(stdout);
-        num++;
-    }
 }
 
 void

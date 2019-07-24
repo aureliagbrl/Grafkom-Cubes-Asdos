@@ -25,6 +25,8 @@ MouseDragEventHandler(int posX, int posY)
 {
     mouseDataP->mousePos.x = posX;
     mouseDataP->mousePos.y = posY;
+
+    std::cout << "(" << mouseDataP->mousePos.x << " " << mouseDataP->mousePos.y << ")" << "            \r"; fflush(stdout);
 }
 
 void

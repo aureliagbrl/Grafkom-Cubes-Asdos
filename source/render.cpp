@@ -78,15 +78,22 @@ BlitDisplay(int deltaTime)
     cameraDataP->rotation.x = 1;
     cameraDataP->rotation.y = 0.5;
     cameraDataP->rotation.z = 0.25;
-    cameraDataP->angle += 0.0001f;
+    cameraDataP->angle += 0.0003f;
 
     if(cameraDataP->angle >= 360)
     {
         cameraDataP->angle = 0.0f;
     }
 
-    std::cout << cameraDataP->angle << " " << cameraDataP->rotation.x << "         \r";
-    fflush(stdout);
+    std::string title;
+    title.append("x:");
+    title.append(std::to_string(cameraDataP->angle * cameraDataP->rotation.x));
+    title.append("y:");
+    title.append(std::to_string(cameraDataP->angle * cameraDataP->rotation.y));
+    title.append("z:");
+    title.append(std::to_string(cameraDataP->angle * cameraDataP->rotation.z));
+    title.append("         \r");
+    std::cout << title;
 
     glutPostRedisplay();
     glutTimerFunc(deltaTime, BlitDisplay, 0);

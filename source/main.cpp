@@ -34,12 +34,12 @@ InitGame()
 
     std::cerr << "    Loading Texture..." << std::endl;
     // Cube Texture Load;
-    cubeTextureData.face1 = LoadTexture("../Data/skate.bmp", 1024, 1024);
-    cubeTextureData.face2 = LoadTexture("../Data/cat.bmp", 1024, 1024);
-    cubeTextureData.face3 = LoadTexture("../Data/brick.bmp", 1024, 1024);
-    cubeTextureData.face4 = LoadTexture("../Data/ceramic.bmp", 1024, 1024);
-    cubeTextureData.face5 = LoadTexture("../Data/tiles.bmp", 1024, 1024);
-    cubeTextureData.face6 = LoadTexture("../Data/metal.bmp", 1024, 1024);
+    cubeTextureData.face1 = LoadTexture("../Data/1.bmp", 1024, 1024);
+    cubeTextureData.face2 = LoadTexture("../Data/2.bmp", 1024, 1024);
+    cubeTextureData.face3 = LoadTexture("../Data/3.bmp", 1024, 1024);
+    cubeTextureData.face4 = LoadTexture("../Data/4.bmp", 1024, 1024);
+    cubeTextureData.face5 = LoadTexture("../Data/5.bmp", 1024, 1024);
+    cubeTextureData.face6 = LoadTexture("../Data/6.bmp", 1024, 1024);
 
     InitRender(&cameraData, &cubeTextureData, &mouseData);
     InitControl(&mouseData);

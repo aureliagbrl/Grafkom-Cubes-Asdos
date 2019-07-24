@@ -3,15 +3,18 @@
 
 #include "common.hpp"
 #include "render.hpp"
+#include "math.h"
 
 CameraData * cameraDataP;
+MouseData * mouseDataP2;
 CubeTextureData * cubeTextureDataP;
 
 void
-InitRender(CameraData * initCameraData, CubeTextureData * initCubeTextureData)
+InitRender(CameraData * initCameraData, CubeTextureData * initCubeTextureData, MouseData * initMouseData)
 {
     cameraDataP = initCameraData;
     cubeTextureDataP = initCubeTextureData;
+    mouseDataP2 = initMouseData;
 }
 
 void
@@ -85,18 +88,34 @@ RenderDisplay()
     glutSwapBuffers();
 }
 
+MousePos lastPressedMousePos;
+MousePos lastMousePos;
+float lastMouseAngle = 0.0f;
+
 void
 BlitDisplay(int)
 {
-    cameraDataP->rotation.x = 1;
-    cameraDataP->rotation.y = 0.5;
-    cameraDataP->rotation.z = 0.25;
-    cameraDataP->angle += 1.0f;
-
-    if(cameraDataP->angle >= 360)
-    {
-        cameraDataP->angle = 0.0f;
+    if(mouseDataP2->isPressed){
+        cameraDataP->rotation.x = (mouseDataP2->mousePos.y - lastMousePos.y );
+        cameraDataP->rotation.y = (mouseDataP2->mousePos.x - lastMousePos.y );
+        lastPressedMousePos.x = cameraDataP->rotation.x;
+        lastPressedMousePos.y = cameraDataP->rotation.y;
+        lastMouseAngle = (mouseDataP2->mousePos.x + mouseDataP2->mousePos.y)/2;
+    } else {
+        lastMousePos.x = mouseDataP2->mousePos.x;
+        lastMousePos.y = mouseDataP2->mousePos.y;
     }
+
+    cameraDataP->angle = lastMouseAngle;
+    std::cout << "a:" << cameraDataP->angle << " ";
+    std::cout << "x:" << cameraDataP->rotation.x << " ";
+    std::cout << "y:" << cameraDataP->rotation.y << " ";
+    std::cout << "lpx:" << lastPressedMousePos.x << " ";
+    std::cout << "lpy:" << lastPressedMousePos.y << " ";
+    std::cout << "lmx:" << lastMousePos.x << " ";
+    std::cout << "lmy:" << lastMousePos.y << " ";
+    std::cout << "                             \r";
+    fflush(stdout);
 
     glutPostRedisplay();
     glutTimerFunc(16, BlitDisplay, 0);
@@ -113,7 +132,7 @@ ReshapeDisplay(int newWidth, int newHeight)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    gluPerspective(45.0f, aspect, 0.1f, 100.0f);
+    gluPerspective(45.0f, aspect, 1.0f, 12.0f);
     
     glutPostRedisplay();
 }

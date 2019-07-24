@@ -3,7 +3,7 @@
 unsigned int
 LoadTexture(const char * filename, int width, int height)
 {
-    std::cerr << "Loading Texture \"" << filename << "\"...\r"; fflush(stderr);
+    std::cerr << "        Loading Texture \"" << filename << "\""; fflush(stderr);
     unsigned int texture;
     unsigned char * data;
 
@@ -49,6 +49,6 @@ LoadTexture(const char * filename, int width, int height)
     gluBuild2DMipmaps(GL_TEXTURE_2D, 3, width, height, GL_RGB, GL_UNSIGNED_BYTE, data );
     free(data);
 
-    std::cout << "Texture \"" << filename << "\" Loaded and Exported To : " << texture << std::endl;
+    std::cout << " | Loaded ! and Exported To : " << texture << std::endl;
     return texture;
 }

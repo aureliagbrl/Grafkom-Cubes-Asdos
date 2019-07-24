@@ -13,12 +13,15 @@ CubeTextureData cubeTextureData;
 void
 InitGame()
 {
+    std::cerr << "Initializating Game..." << std::endl;
+    std::cerr << "    Setting Mouse State..." << std::endl;
     // Mouse Init
     mouseData.buttonNumber = 0;
     mouseData.isPressed = false;
     mouseData.mousePos.x = 0;
     mouseData.mousePos.y = 0;
 
+    std::cerr << "    Setting Camera Position..." << std::endl;
     // Camera Init
     cameraData.pos.x = 0;
     cameraData.pos.y = 0;
@@ -29,6 +32,7 @@ InitGame()
     cameraData.rotation.z = 0;
     cameraData.angle = 0;
 
+    std::cerr << "    Loading Texture..." << std::endl;
     // Cube Texture Load;
     cubeTextureData.face1 = LoadTexture("../Data/skate.bmp", 1024, 1024);
     cubeTextureData.face2 = LoadTexture("../Data/cat.bmp", 1024, 1024);
@@ -37,12 +41,14 @@ InitGame()
     cubeTextureData.face5 = LoadTexture("../Data/tiles.bmp", 1024, 1024);
     cubeTextureData.face6 = LoadTexture("../Data/metal.bmp", 1024, 1024);
 
-    InitRender(&cameraData, &cubeTextureData);
+    InitRender(&cameraData, &cubeTextureData, &mouseData);
     InitControl(&mouseData);
+    std::cerr << "Initalization Done !" << std::endl << std::endl << std::endl;
 }
 
 int
 main(int argc, char** argv) {
+    std::cerr << "Program Load, Begin Glut Initialization" << std::endl;
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
     glutInitWindowSize(800, 800);

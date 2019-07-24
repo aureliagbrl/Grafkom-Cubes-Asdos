@@ -5,11 +5,13 @@
 #include "render.hpp"
 
 CameraData * cameraDataP;
+CubeTextureData * cubeTextureDataP;
 
 void
-InitRender(CameraData * initCameraData)
+InitRender(CameraData * initCameraData, CubeTextureData * initCubeTextureData)
 {
     cameraDataP = initCameraData;
+    cubeTextureDataP = initCubeTextureData;
 }
 
 void
@@ -31,72 +33,73 @@ RenderDisplay()
         cameraDataP->rotation.z
     );
 
-    glBegin(GL_QUADS);                
-        glColor3f(0.0f, 1.0f, 0.0f);     // Green
-        glVertex3f( 1.0f, 1.0f, -1.0f);
-        glVertex3f(-1.0f, 1.0f, -1.0f);
-        glVertex3f(-1.0f, 1.0f,  1.0f);
-        glVertex3f( 1.0f, 1.0f,  1.0f);
+    
+    glBindTexture(GL_TEXTURE_2D, cubeTextureDataP->face1);
+    glBegin(GL_QUADS);
+        glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, 1.0f, -1.0f);
+        glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
+        glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f,  1.0f);
+        glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f, 1.0f,  1.0f);
+    glEnd();
 
-        glColor3f(1.0f, 0.5f, 0.0f);     // Orange
-        glVertex3f( 1.0f, -1.0f,  1.0f);
-        glVertex3f(-1.0f, -1.0f,  1.0f);
-        glVertex3f(-1.0f, -1.0f, -1.0f);
-        glVertex3f( 1.0f, -1.0f, -1.0f);
+    glBindTexture(GL_TEXTURE_2D, cubeTextureDataP->face2);
+    glBegin(GL_QUADS);
+        glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f,  1.0f);
+        glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, -1.0f,  1.0f);
+        glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
+        glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f, -1.0f, -1.0f);
+    glEnd();
 
-        glColor3f(1.0f, 0.0f, 0.0f);     // Red
-        glVertex3f( 1.0f,  1.0f, 1.0f);
-        glVertex3f(-1.0f,  1.0f, 1.0f);
-        glVertex3f(-1.0f, -1.0f, 1.0f);
-        glVertex3f( 1.0f, -1.0f, 1.0f);
+    glBindTexture(GL_TEXTURE_2D, cubeTextureDataP->face3);
+    glBegin(GL_QUADS);
+        glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f,  1.0f, 1.0f);
+        glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,  1.0f, 1.0f);
+        glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
+        glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f, -1.0f, 1.0f);
+    glEnd();
 
-        glColor3f(1.0f, 1.0f, 0.0f);     // Yellow
-        glVertex3f( 1.0f, -1.0f, -1.0f);
-        glVertex3f(-1.0f, -1.0f, -1.0f);
-        glVertex3f(-1.0f,  1.0f, -1.0f);
-        glVertex3f( 1.0f,  1.0f, -1.0f);
+    glBindTexture(GL_TEXTURE_2D, cubeTextureDataP->face4);
+    glBegin(GL_QUADS);
+        glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f, -1.0f);
+        glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
+        glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f,  1.0f, -1.0f);
+        glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f,  1.0f, -1.0f);
+    glEnd();
 
-        glColor3f(0.0f, 0.0f, 1.0f);     // Blue
-        glVertex3f(-1.0f,  1.0f,  1.0f);
-        glVertex3f(-1.0f,  1.0f, -1.0f);
-        glVertex3f(-1.0f, -1.0f, -1.0f);
-        glVertex3f(-1.0f, -1.0f,  1.0f);
+    glBindTexture(GL_TEXTURE_2D, cubeTextureDataP->face5);
+    glBegin(GL_QUADS);
+        glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f,  1.0f,  1.0f);
+        glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f,  1.0f, -1.0f);
+        glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
+        glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f,  1.0f);
+    glEnd();
 
-        glColor3f(1.0f, 0.0f, 1.0f);     // Magenta
-        glVertex3f(1.0f,  1.0f, -1.0f);
-        glVertex3f(1.0f,  1.0f,  1.0f);
-        glVertex3f(1.0f, -1.0f,  1.0f);
-        glVertex3f(1.0f, -1.0f, -1.0f);
+    glBindTexture(GL_TEXTURE_2D, cubeTextureDataP->face6);
+    glBegin(GL_QUADS);
+        glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f,  1.0f, -1.0f);
+        glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f,  1.0f,  1.0f);
+        glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, -1.0f,  1.0f);
+        glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, -1.0f, -1.0f);
     glEnd();
 
     glutSwapBuffers();
 }
 
 void
-BlitDisplay(int deltaTime)
+BlitDisplay(int)
 {
     cameraDataP->rotation.x = 1;
     cameraDataP->rotation.y = 0.5;
     cameraDataP->rotation.z = 0.25;
-    cameraDataP->angle += 0.0003f;
+    cameraDataP->angle += 1.0f;
 
     if(cameraDataP->angle >= 360)
     {
         cameraDataP->angle = 0.0f;
     }
 
-    std::string title;
-    title.append("x:");
-    title.append(std::to_string(cameraDataP->angle * cameraDataP->rotation.x));
-    title.append("y:");
-    title.append(std::to_string(cameraDataP->angle * cameraDataP->rotation.y));
-    title.append("z:");
-    title.append(std::to_string(cameraDataP->angle * cameraDataP->rotation.z));
-    title.append("         \r");
-    std::cout << title;
-
     glutPostRedisplay();
-    glutTimerFunc(deltaTime, BlitDisplay, 0);
+    glutTimerFunc(16, BlitDisplay, 0);
 }
 
 void 

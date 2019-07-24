@@ -1,19 +1,20 @@
 #include "texture.hpp"
 
 unsigned int
-LoadTexture(const char * filename)
+LoadTexture(const char * filename, int width, int height)
 {
+    std::cerr << "Loading Texture \"" << filename << "\"...\r"; fflush(stderr);
     unsigned int texture;
-    int width, height;
     unsigned char * data;
 
     FILE * file;
 
-    file = fopen( filename, "rb" );
+    file = fopen(filename, "rb");
 
-    if ( file == NULL ) return 0;
-    width = 1024;
-    height = 512;
+    if ( file == NULL ){
+        std::cerr << "File Not Found !        " << std::endl; fflush(stderr);
+        return 0;
+    }
     data = (unsigned char *)malloc( width * height * 3 );
 
     fread( data, width * height * 3, 1, file );
@@ -48,5 +49,6 @@ LoadTexture(const char * filename)
     gluBuild2DMipmaps(GL_TEXTURE_2D, 3, width, height, GL_RGB, GL_UNSIGNED_BYTE, data );
     free(data);
 
+    std::cout << "Texture \"" << filename << "\" Loaded and Exported To : " << texture << std::endl;
     return texture;
 }

@@ -25,4 +25,13 @@ struct CameraData{
     float angle;
 };
 
+struct CubeTextureData{
+    unsigned int face1;
+    unsigned int face2;
+    unsigned int face3;
+    unsigned int face4;
+    unsigned int face5;
+    unsigned int face6;
+};
+
 #endif

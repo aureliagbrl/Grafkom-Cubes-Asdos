@@ -3,7 +3,7 @@
 
 #include "common.hpp"
 
-void InitRender(CameraData *);
+void InitRender(CameraData *, CubeTextureData *);
 void RenderDisplay();
 void BlitDisplay(int);
 void ReshapeDisplay(int, int);

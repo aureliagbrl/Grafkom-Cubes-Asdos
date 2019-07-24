@@ -4,6 +4,6 @@
 #include <iostream>
 #include <GL/glut.h>
 
-unsigned int LoadTexture(const char *);
+unsigned int LoadTexture(const char *, int, int);
 
 #endif
